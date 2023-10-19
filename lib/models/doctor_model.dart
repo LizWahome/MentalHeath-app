@@ -19,17 +19,17 @@ List<DoctorModel> nearbyDoctors = [
       position: "Therapist",
       averageReview: 3.5,
       totalReview: 202,
-      profile: "assets/plant-8203430_1280.png"),
+      profile: "assets/dentist-1191671_1280.jpg"),
   DoctorModel(
-      name: "Mary Wahome",
+      name: "Dr. Mary Wahome",
       position: "Psychiatrist",
       averageReview: 4.5,
       totalReview: 205,
-      profile: "assets/ai-generated-8309224_1280.png"),
+      profile: "assets/doctor-2337835_1280.jpg"),
   DoctorModel(
       name: "Dr. Scott Mohammed",
       position: "Psychologist",
       averageReview: 4.2,
       totalReview: 180,
-      profile: "assets/toddler-8297939_1280.jpg")
+      profile: "assets/woman-216988_1280.jpg")
 ];

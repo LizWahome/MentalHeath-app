@@ -20,6 +20,8 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmpassController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController roleController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   final _auth = FirebaseAuth.instance;
@@ -32,6 +34,8 @@ class _RegisterPageState extends State<RegisterPage> {
     emailController.dispose();
     passwordController.dispose();
     confirmpassController.dispose();
+    nameController.dispose();
+    roleController.dispose();
   }
 
   @override
@@ -49,7 +53,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             Container(
               decoration: BoxDecoration(
-             gradient: LinearGradient(colors: [
+                gradient: LinearGradient(colors: [
                   Colors.blueGrey.withOpacity(0.5),
                   Colors.white.withOpacity(0.1),
                   Colors.blue
@@ -59,69 +63,73 @@ class _RegisterPageState extends State<RegisterPage> {
             Flex(
               mainAxisAlignment: MainAxisAlignment.end,
               direction: Axis.vertical,
-              children: [Align(
-                alignment: Alignment.center,
-                child: Form(
-                    key: _formKey,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: TextFormField(
-                              controller: emailController,
-                              decoration: const InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  labelStyle: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                  fillColor: Colors.white,
-                                  filled: true,
-                                  hintText: "Email"),
-                              validator: (email) =>
-                                  email != null && !EmailValidator.validate(email)
-                                      ? 'Enter a valid email'
-                                      : null,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: TextFormField(
-                              controller: passwordController,
-                              obscureText: isPasswordVisible,
-                              decoration: InputDecoration(
-                                border: const OutlineInputBorder(),
-                                labelStyle: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                                fillColor: Colors.white,
-                                filled: true,
-                                hintText: "Password",
-                                suffixIcon: IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      isPasswordVisible = !isPasswordVisible;
-                                    });
-                                  },
-                                  icon: Icon(
-                                    isPasswordVisible
-                                        ? Icons.visibility_off_outlined
-                                        : Icons.visibility_outlined,
-                                    color: Colors.black54,
-                                  ),
-                                ),
+              children: [
+                Align(
+                  alignment: Alignment.center,
+                  child: Form(
+                      key: _formKey,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: TextFormField(
+                                controller: nameController,
+                                decoration: const InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelStyle: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    hintText: "Name"),
+                                // validator: (email) =>
+                                //     email != null && !EmailValidator.validate(email)
+                                //         ? 'Enter a valid email'
+                                //         : null,
                               ),
-                              validator: (value) =>
-                                  value != null && value.length < 8
-                                      ? "Enter at least 8 characters"
-                                      : null,
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: TextFormField(
-                                controller: confirmpassController,
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: TextFormField(
+                                controller: roleController,
+                                decoration: const InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelStyle: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    hintText: "Role"),
+                                // validator: (email) =>
+                                //     email != null && !EmailValidator.validate(email)
+                                //         ? 'Enter a valid email'
+                                //         : null,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: TextFormField(
+                                controller: emailController,
+                                decoration: const InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelStyle: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    hintText: "Email"),
+                                validator: (email) => email != null &&
+                                        !EmailValidator.validate(email)
+                                    ? 'Enter a valid email'
+                                    : null,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: TextFormField(
+                                controller: passwordController,
                                 obscureText: isPasswordVisible,
                                 decoration: InputDecoration(
                                   border: const OutlineInputBorder(),
@@ -130,7 +138,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       fontWeight: FontWeight.bold),
                                   fillColor: Colors.white,
                                   filled: true,
-                                  hintText: "Confirm Password",
+                                  hintText: "Password",
                                   suffixIcon: IconButton(
                                     onPressed: () {
                                       setState(() {
@@ -145,54 +153,91 @@ class _RegisterPageState extends State<RegisterPage> {
                                     ),
                                   ),
                                 ),
-                                validator: (value) {
-                                  final password = passwordController.text;
-                                  final confirmPassword =
-                                      confirmpassController.text;
-                                  if (confirmPassword != password) {
-                                    return "Password does not match";
-                                  }
-                                  return null;
-                                }),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const LoginPage()));
-                              },
-                              child: const Text("Already have an account? Login",
-                                  style: TextStyle(
-                                      color: Colors.deepPurple,
-                                      fontWeight: FontWeight.bold))),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: SizedBox(
-                              width: double.infinity,
-                              child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.deepPurple),
-                                  onPressed: () {
-                                    signUp();
-                                  },
-                                  child: const Padding(
-                                    padding: EdgeInsets.all(16.0),
-                                    child: Text("Register"),
-                                  )),
+                                validator: (value) =>
+                                    value != null && value.length < 8
+                                        ? "Enter at least 8 characters"
+                                        : null,
+                              ),
                             ),
-                          )
-                        ],
-                      ),
-                    )),
-              ),
-          ],)
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: TextFormField(
+                                  controller: confirmpassController,
+                                  obscureText: isPasswordVisible,
+                                  decoration: InputDecoration(
+                                    border: const OutlineInputBorder(),
+                                    labelStyle: const TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    hintText: "Confirm Password",
+                                    suffixIcon: IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          isPasswordVisible =
+                                              !isPasswordVisible;
+                                        });
+                                      },
+                                      icon: Icon(
+                                        isPasswordVisible
+                                            ? Icons.visibility_off_outlined
+                                            : Icons.visibility_outlined,
+                                        color: Colors.black54,
+                                      ),
+                                    ),
+                                  ),
+                                  validator: (value) {
+                                    final password = passwordController.text;
+                                    final confirmPassword =
+                                        confirmpassController.text;
+                                    if (confirmPassword != password) {
+                                      return "Password does not match";
+                                    }
+                                    return null;
+                                  }),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const LoginPage()));
+                                },
+                                child: const Text(
+                                    "Already have an account? Login",
+                                    style: TextStyle(
+                                        color: Colors.deepPurple,
+                                        fontWeight: FontWeight.bold))),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: SizedBox(
+                                width: double.infinity,
+                                child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.deepPurple),
+                                    onPressed: () {
+                                      signUp();
+                                    },
+                                    child: const Padding(
+                                      padding: EdgeInsets.all(16.0),
+                                      child: Text("Register"),
+                                    )),
+                              ),
+                            )
+                          ],
+                        ),
+                      )),
+                ),
+              ],
+            )
           ],
         ),
       ),

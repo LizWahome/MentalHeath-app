@@ -1,5 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:mental_health_app/main.dart';
 import 'package:mental_health_app/pages/chat_screen.dart';
@@ -19,6 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
   final _auth = FirebaseAuth.instance;
+  final dbRef = FirebaseDatabase.instance.ref("Users");
 
   @override
   void dispose() {
@@ -34,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
       child: Scaffold(
         body: Stack(
           children: [
-             Image(
+            Image(
               image: const AssetImage("assets/conversation-7559233_1280.jpg"),
               fit: BoxFit.contain,
               height: MediaQuery.of(context).size.height * 0.6,
@@ -53,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
               direction: Axis.vertical,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                    Form(
+                Form(
                     key: _formKey,
                     child: SingleChildScrollView(
                       child: Column(
@@ -71,10 +73,10 @@ class _LoginPageState extends State<LoginPage> {
                                   fillColor: Colors.white,
                                   filled: true,
                                   hintText: "Email"),
-                              validator: (email) =>
-                                  email != null && !EmailValidator.validate(email)
-                                      ? 'Enter a valid email'
-                                      : null,
+                              validator: (email) => email != null &&
+                                      !EmailValidator.validate(email)
+                                  ? 'Enter a valid email'
+                                  : null,
                             ),
                           ),
                           Padding(
@@ -89,9 +91,10 @@ class _LoginPageState extends State<LoginPage> {
                                   fillColor: Colors.white,
                                   filled: true,
                                   hintText: "Password"),
-                              validator: (value) => value != null && value.length < 8
-                                  ? "Enter at least 8 characters"
-                                  : null,
+                              validator: (value) =>
+                                  value != null && value.length < 8
+                                      ? "Enter at least 8 characters"
+                                      : null,
                             ),
                           ),
                           const SizedBox(
@@ -102,7 +105,8 @@ class _LoginPageState extends State<LoginPage> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => const RegisterPage()));
+                                        builder: (context) =>
+                                            const RegisterPage()));
                               },
                               child: const Text(
                                 "Don't have an account?  Register",
@@ -134,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                         ],
                       ),
                     )),
-                  ],
+              ],
             )
           ],
         ),
@@ -157,6 +161,9 @@ class _LoginPageState extends State<LoginPage> {
       await _auth.signInWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim());
+      final user = _auth.currentUser!;
+      final userID = user.uid;
+      print("User uid = $userID");
     } on FirebaseAuthException catch (e) {
       print(e);
       ScaffoldMessenger.of(context)
