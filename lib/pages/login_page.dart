@@ -1,10 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:mental_health_app/main.dart';
-import 'package:mental_health_app/pages/chat_screen.dart';
+import 'package:mental_health_app/pages/bottom_nav_bar.dart';
 import 'package:mental_health_app/pages/register_page.dart';
+import 'package:mental_health_app/pages/therapist_page.dart';
 import 'package:mental_health_app/pages/welcome_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -20,7 +20,6 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
   final _auth = FirebaseAuth.instance;
-  final dbRef = FirebaseDatabase.instance.ref("Users");
 
   @override
   void dispose() {
@@ -100,20 +99,31 @@ class _LoginPageState extends State<LoginPage> {
                           const SizedBox(
                             height: 20,
                           ),
-                          TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const RegisterPage()));
-                              },
-                              child: const Text(
-                                "Don't have an account?  Register",
-                                style: TextStyle(
-                                    color: Colors.deepPurple,
-                                    fontWeight: FontWeight.bold),
-                              )),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text("Don't have an account?",
+                                  style: TextStyle(
+                                      color: Colors.deepPurple,
+                                      fontWeight: FontWeight.w500)),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const RegisterPage()));
+                                },
+                                child: const Text("Register",
+                                    style: TextStyle(
+                                        color: Colors.blue,
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                            ],
+                          ),
                           Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: SizedBox(
@@ -123,11 +133,6 @@ class _LoginPageState extends State<LoginPage> {
                                       backgroundColor: Colors.deepPurple),
                                   onPressed: () {
                                     signIn();
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) =>
-                                    //             const ChatScreen()));
                                   },
                                   child: const Padding(
                                     padding: EdgeInsets.all(16.0),
@@ -148,6 +153,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<void> signIn() async {
     final isValid = _formKey.currentState!.validate();
+    _formKey.currentState!.save();
     if (!isValid) return;
     showDialog(
         context: context,
@@ -155,19 +161,45 @@ class _LoginPageState extends State<LoginPage> {
         builder: (context) => const Center(
               child: CircularProgressIndicator(),
             ));
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const WelcomePage()));
     try {
-      await _auth.signInWithEmailAndPassword(
-          email: emailController.text.trim(),
-          password: passwordController.text.trim());
-      final user = _auth.currentUser!;
-      final userID = user.uid;
+      UserCredential userCredential = await _auth
+          .signInWithEmailAndPassword(
+              email: emailController.text.trim(),
+              password: passwordController.text.trim())
+          .whenComplete(() {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          dismissDirection: DismissDirection.up,
+          content: Text(
+            "Successfully logged in.",
+          ),
+          backgroundColor: Colors.green,
+        ));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const WelcomePage()));
+      });
+      User? user = userCredential.user;
+      final userID = user!.uid;
       print("User uid = $userID");
+      DocumentSnapshot snapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
+      if (snapshot.exists) {
+        Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+        if (data['role'] == 'Therapist') {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const TherapistPage()));
+        } else if (data['role'] == 'Student') {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const BottomNavBar()));
+        }
+      } else {
+        return;
+      }
     } on FirebaseAuthException catch (e) {
       print(e);
       ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("Email already exists")));
+          .showSnackBar(const SnackBar(content: Text("Something went wrong")));
     } catch (e) {
       print(e.toString());
     }

@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mental_health_app/pages/chat_screen.dart';
 import 'package:mental_health_app/pages/login_page.dart';
 import 'package:mental_health_app/pages/welcome_page.dart';
 
@@ -59,18 +58,17 @@ class _SpashPageState extends State<SpashPage> with TickerProviderStateMixin {
   }
 
   void _checkUser() {
-    final _auth = FirebaseAuth.instance;
-    User? user = _auth.currentUser;
+    final auth = FirebaseAuth.instance;
+    User? user = auth.currentUser;
     if (user != null) {
-      Future.delayed(Duration(seconds: 6), () async {
+      Future.delayed(const Duration(seconds: 6), () async {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => WelcomePage()));
+            context, MaterialPageRoute(builder: (context) => const WelcomePage()));
       });
-      ;
     } else {
-      Future.delayed(Duration(seconds: 6), () async {
+      Future.delayed(const Duration(seconds: 6), () async {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LoginPage()));
+            context, MaterialPageRoute(builder: (context) => const LoginPage()));
       });
     }
   }

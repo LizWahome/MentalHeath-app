@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mental_health_app/widgets/tab_pages/completed.dart';
 import 'package:mental_health_app/widgets/tab_pages/upcomming.dart';
 
 class SchedulePage extends StatefulWidget {
@@ -12,48 +13,55 @@ class _SchedulePageState extends State<SchedulePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: DefaultTabController(
-          length: 3,
-          child: NestedScrollView(
-              headerSliverBuilder: (context, value) {
-                return [
-                  SliverAppBar(
-                      title: Text("Schedule",
-                          style: TextStyle(
-                            color: Colors.black.withOpacity(0.7),
-                              fontSize: 24,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: 'LilitaOne')),
-                      bottom: TabBar(
-                          indicator: BoxDecoration(
-                              color: Colors.blue.shade700,
-                              borderRadius: BorderRadius.circular(12)),
-                          labelColor: Colors.white,
-                          unselectedLabelColor: Colors.black,
-                          tabs: const [
-                            Tab(
-                              text: "Upcoming",
-                            ),
-                            Tab(
-                              text: "Complete",
-                            ),
-                            Tab(
-                              text: "Result",
-                            )
-                          ]))
-                ];
-              },
-              body: const TabBarView(
-                children: [
-                  UpcomingPage(),
-                  Center(
-                    child: Text("Complete"),
-                  ),
-                  Center(
-                    child: Text("Result"),
-                  ),
-                ],
-              ))),
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
+              Colors.blueGrey.withOpacity(0.5),
+              Colors.white.withOpacity(0.1),
+              Colors.blue
+            ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
+          ),
+        child: DefaultTabController(
+            length: 3,
+            child: NestedScrollView(
+                headerSliverBuilder: (context, value) {
+                  return [
+                    SliverAppBar(
+                        title: Text("Schedule",
+                            style: TextStyle(
+                              color: Colors.black.withOpacity(0.7),
+                                fontSize: 24,
+                                fontWeight: FontWeight.w400,
+                                fontFamily: 'LilitaOne')),
+                        bottom: TabBar(
+                            indicator: BoxDecoration(
+                                color: Colors.blue.shade700,
+                                borderRadius: BorderRadius.circular(12)),
+                            labelColor: Colors.white,
+                            unselectedLabelColor: Colors.black,
+                            tabs: const [
+                              Tab(
+                                text: "Upcoming",
+                              ),
+                              Tab(
+                                text: "Complete",
+                              ),
+                              Tab(
+                                text: "Result",
+                              )
+                            ]))
+                  ];
+                },
+                body: const TabBarView(
+                  children: [
+                    UpcomingPage(),
+                   CompletedPage(),
+                    Center(
+                      child: Text("Result"),
+                    ),
+                  ],
+                ))),
+      ),
     );
     // Scaffold(
     //   body: SafeArea(

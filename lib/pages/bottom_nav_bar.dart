@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mental_health_app/pages/chat_screen.dart';
 import 'package:mental_health_app/pages/home_page.dart';
+import 'package:mental_health_app/pages/profile_page.dart';
 import 'package:mental_health_app/pages/schedule_page.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -16,9 +17,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     HomePage(),
     SchedulePage(),
    ChatScreen(),
-    Center(
-      child: Text("Profile"),
-    ),
+    ProfilePage(),
   ]; 
   @override
   Widget build(BuildContext context) {

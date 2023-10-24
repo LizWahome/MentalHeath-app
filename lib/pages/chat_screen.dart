@@ -38,6 +38,13 @@ class _ChatScreenState extends State<ChatScreen> {
         ],
       ),
       body: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
+              Colors.blueGrey.withOpacity(0.5),
+              Colors.white.withOpacity(0.1),
+              Colors.blue
+            ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
+          ),
         child: Column(
           children: [
             Expanded(child: MessagesScreen(messages1: messages)),
