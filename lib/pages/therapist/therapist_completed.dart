@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mental_health_app/widgets/schedule_doctor.dart';
 
-class UpcomingPage extends StatefulWidget {
-  const UpcomingPage({super.key});
+class TherapistCompletedPage extends StatefulWidget {
+  const TherapistCompletedPage({super.key});
 
   @override
-  State<UpcomingPage> createState() => _UpcomingPageState();
+  State<TherapistCompletedPage> createState() => _TherapistCompletedPageState();
 }
 
-class _UpcomingPageState extends State<UpcomingPage> {
+class _TherapistCompletedPageState extends State<TherapistCompletedPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,9 +17,9 @@ class _UpcomingPageState extends State<UpcomingPage> {
         child: Column(
           children: [
               ScheduleDoctor(
-              image: "assets/doctor-5710152_1280.jpg", 
-              name: "Dr. Nkono", 
-              title: "Psychologist", 
+              image: "assets/male-2101801_1280.jpg", 
+              name: "Dedan Kin", 
+              title: "Student", 
               day: "Today", 
               date: "09:00 - 11:00",
               ),
@@ -27,9 +27,9 @@ class _UpcomingPageState extends State<UpcomingPage> {
                 height: 10,
               ),
               ScheduleDoctor(
-              image: "assets/crutches-538883_1280.jpg", 
-              name: "Dr. Madiha", 
-              title: "Psychologist", 
+              image: "assets/man-8002901_1280.jpg", 
+              name: "Phillip Bright", 
+              title: "Student", 
               day: "Monday", 
               date: "09:00 - 11:00",
               ),
@@ -37,11 +37,14 @@ class _UpcomingPageState extends State<UpcomingPage> {
                 height: 10,
               ),
               ScheduleDoctor(
-              image: "assets/dentist-1191671_1280.jpg", 
-              name: "Dr. Esther Wanja", 
-              title: "Psychologist", 
+              image: "assets/portrait-3416680_1280.jpg", 
+              name: "Robert Ndirangu", 
+              title: "Student", 
               day: "Saturday", 
-              date: "09:00 - 11:00",
+              date: "2:00 - 3:00",
+              ),
+              SizedBox(
+                height: 10,
               ),
             ],
         ),

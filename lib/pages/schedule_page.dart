@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mental_health_app/pages/chat_screen.dart';
 import 'package:mental_health_app/widgets/tab_pages/completed.dart';
 import 'package:mental_health_app/widgets/tab_pages/upcomming.dart';
 
@@ -47,7 +48,7 @@ class _SchedulePageState extends State<SchedulePage> {
                                 text: "Complete",
                               ),
                               Tab(
-                                text: "Result",
+                                text: "ChatBot",
                               )
                             ]))
                   ];
@@ -56,9 +57,7 @@ class _SchedulePageState extends State<SchedulePage> {
                   children: [
                     UpcomingPage(),
                    CompletedPage(),
-                    Center(
-                      child: Text("Result"),
-                    ),
+                    ChatScreen()
                   ],
                 ))),
       ),

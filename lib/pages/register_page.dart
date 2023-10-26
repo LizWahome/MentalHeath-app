@@ -60,7 +60,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     const Image(
-                      image: AssetImage("assets/conversation-7559233_1280-removebg-preview.png"),
+                      image: AssetImage(
+                          "assets/conversation-7559233_1280-removebg-preview.png"),
                       fit: BoxFit.contain,
                       //height: double.infinity,
                       width: double.infinity,
@@ -77,9 +78,9 @@ class _RegisterPageState extends State<RegisterPage> {
                             fillColor: Colors.white,
                             filled: true,
                             hintText: "Name"),
-                        // validator: (email) =>
-                        //     email != null && !EmailValidator.validate(email)
-                        //         ? 'Enter a valid email'
+                        // validator: (name) =>
+                        //     name != null
+                        //         ? 'This part is required'
                         //         : null,
                       ),
                     ),
@@ -88,17 +89,15 @@ class _RegisterPageState extends State<RegisterPage> {
                       child: TextFormField(
                         controller: roleController,
                         decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelStyle: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                            fillColor: Colors.white,
-                            filled: true,
-                            hintText: "Role"),
-                        // validator: (email) =>
-                        //     email != null && !EmailValidator.validate(email)
-                        //         ? 'Enter a valid email'
-                        //         : null,
+                          border: OutlineInputBorder(),
+                          labelStyle: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                          fillColor: Colors.white,
+                          filled: true,
+                          hintText: "Role(therapist/student)",
+                        ),
+                        // validator: (role) =>
+                        //     role != null ? 'This part is required' : null,
                       ),
                     ),
                     Padding(
@@ -196,7 +195,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             style: TextStyle(
                                 color: Colors.deepPurple,
                                 fontWeight: FontWeight.w500)),
-                        SizedBox(
+                        const SizedBox(
                           width: 5,
                         ),
                         GestureDetector(
@@ -224,13 +223,14 @@ class _RegisterPageState extends State<RegisterPage> {
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.deepPurple),
                             onPressed: () {
-                              signUp().then((value) {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const WelcomePage()));
-                              });
+                              signUp();
+                              // signUp().then((value) {
+                              //   Navigator.push(
+                              //       context,
+                              //       MaterialPageRoute(
+                              //           builder: (context) =>
+                              //               const WelcomePage()));
+                              // });
                             },
                             child: const Padding(
                               padding: EdgeInsets.all(16.0),
@@ -276,10 +276,13 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Future signUpData(String name, String role, String email) async {
-    final docUser = FirebaseFirestore.instance.collection('users').doc();
-    final user =
-        UserModel(id: docUser.id, email: email, name: name, role: role);
-    final json = user.toJson();
+    final user = FirebaseAuth.instance.currentUser;
+    final docUser =
+        FirebaseFirestore.instance.collection('users').doc(user!.uid);
+    //final docUser = FirebaseAuth.instance.currentUser;
+    final firebaseUser =
+        UserModel(uid: docUser.id, email: email, name: name, role: role);
+    final json = firebaseUser.toJson();
     await docUser.set(json).whenComplete(() {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text(

@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mental_health_app/pages/bottom_nav_bar.dart';
 import 'package:mental_health_app/pages/register_page.dart';
-import 'package:mental_health_app/pages/therapist_page.dart';
+import 'package:mental_health_app/pages/therapist/therapist_page.dart';
 import 'package:mental_health_app/pages/welcome_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -180,22 +180,22 @@ class _LoginPageState extends State<LoginPage> {
       User? user = userCredential.user;
       final userID = user!.uid;
       print("User uid = $userID");
-      DocumentSnapshot snapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.uid)
-          .get();
-      if (snapshot.exists) {
-        Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
-        if (data['role'] == 'Therapist') {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const TherapistPage()));
-        } else if (data['role'] == 'Student') {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const BottomNavBar()));
-        }
-      } else {
-        return;
-      }
+      // DocumentSnapshot snapshot = await FirebaseFirestore.instance
+      //     .collection('users')
+      //     .doc(user.uid)
+      //     .get();
+      // if (snapshot.exists) {
+      //   Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+      //   if (data['role'] == 'Therapist') {
+      //     Navigator.push(context,
+      //         MaterialPageRoute(builder: (context) => const TherapistPage()));
+      //   } else if (data['role'] == 'Student') {
+      //     Navigator.push(context,
+      //         MaterialPageRoute(builder: (context) => const BottomNavBar()));
+      //   }
+      // } else {
+      //   return;
+      // }
     } on FirebaseAuthException catch (e) {
       print(e);
       ScaffoldMessenger.of(context)

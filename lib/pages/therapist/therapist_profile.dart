@@ -5,14 +5,14 @@ import 'package:mental_health_app/theme/theme.dart';
 import 'package:mental_health_app/widgets/profile_row_widget.dart';
 import 'package:provider/provider.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+class TherapistProfile extends StatefulWidget {
+  const TherapistProfile({super.key});
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  State<TherapistProfile> createState() => _TherapistProfileState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _TherapistProfileState extends State<TherapistProfile> {
   bool isSwitched = false;
 
   @override
@@ -37,7 +37,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 width: double.infinity,
                 decoration: const BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage("assets/sad-2042536_1280.jpg"),
+                        image: AssetImage("assets/doctor-2337835_1280.jpg"),
                         fit: BoxFit.cover)),
               ),
               Container(
@@ -63,19 +63,19 @@ class _ProfilePageState extends State<ProfilePage> {
                     const SizedBox(
                       height: 16,
                     ),
-                    ProfileWidgetRow(icon: Icons.email, text: "Email"),
+                    const ProfileWidgetRow(icon: Icons.email, text: "Email"),
                     const SizedBox(
                       height: 25,
                     ),
-                    ProfileWidgetRow(icon: Icons.phone, text: "Phone number"),
+                    const ProfileWidgetRow(icon: Icons.phone, text: "Phone number"),
                     const SizedBox(
                       height: 25,
                     ),
-                    ProfileWidgetRow(icon: Icons.location_city_rounded, text: "Address"),
+                    const ProfileWidgetRow(icon: Icons.location_city_rounded, text: "Address"),
                     const SizedBox(
                       height: 25,
                     ),
-                    ProfileWidgetRow(icon: Icons.date_range_rounded, text: "Date joined"),
+                    const ProfileWidgetRow(icon: Icons.date_range_rounded, text: "Date joined"),
                     const SizedBox(
                       height: 25,
                     ),
@@ -124,7 +124,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         //     })
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 25,
                     ),
                     Row(
@@ -135,7 +135,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => LoginPage())));
+                                        builder: (context) => const LoginPage())));
                           },
                           child: Icon(
                             Icons.logout_rounded,
