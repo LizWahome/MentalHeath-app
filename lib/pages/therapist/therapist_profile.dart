@@ -21,13 +21,14 @@ class _TherapistProfileState extends State<TherapistProfile> {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
+        height: double.infinity,
         decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-              Colors.blueGrey.withOpacity(0.5),
-              Colors.white.withOpacity(0.1),
-              Colors.blue
-            ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
-          ),
+          gradient: LinearGradient(colors: [
+            Colors.blueGrey.withOpacity(0.5),
+            Colors.white.withOpacity(0.1),
+            Colors.blue
+          ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
+        ),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,15 +68,18 @@ class _TherapistProfileState extends State<TherapistProfile> {
                     const SizedBox(
                       height: 25,
                     ),
-                    const ProfileWidgetRow(icon: Icons.phone, text: "Phone number"),
+                    const ProfileWidgetRow(
+                        icon: Icons.phone, text: "Phone number"),
                     const SizedBox(
                       height: 25,
                     ),
-                    const ProfileWidgetRow(icon: Icons.location_city_rounded, text: "Address"),
+                    const ProfileWidgetRow(
+                        icon: Icons.location_city_rounded, text: "Address"),
                     const SizedBox(
                       height: 25,
                     ),
-                    const ProfileWidgetRow(icon: Icons.date_range_rounded, text: "Date joined"),
+                    const ProfileWidgetRow(
+                        icon: Icons.date_range_rounded, text: "Date joined"),
                     const SizedBox(
                       height: 25,
                     ),
@@ -135,7 +139,8 @@ class _TherapistProfileState extends State<TherapistProfile> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => const LoginPage())));
+                                        builder: (context) =>
+                                            const LoginPage())));
                           },
                           child: Icon(
                             Icons.logout_rounded,

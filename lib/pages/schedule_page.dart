@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mental_health_app/pages/chat_screen.dart';
 import 'package:mental_health_app/widgets/tab_pages/completed.dart';
 import 'package:mental_health_app/widgets/tab_pages/upcomming.dart';
 
@@ -23,7 +22,7 @@ class _SchedulePageState extends State<SchedulePage> {
             ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
           ),
         child: DefaultTabController(
-            length: 3,
+            length: 2,
             child: NestedScrollView(
                 headerSliverBuilder: (context, value) {
                   return [
@@ -47,9 +46,7 @@ class _SchedulePageState extends State<SchedulePage> {
                               Tab(
                                 text: "Complete",
                               ),
-                              Tab(
-                                text: "ChatBot",
-                              )
+                             
                             ]))
                   ];
                 },
@@ -57,7 +54,6 @@ class _SchedulePageState extends State<SchedulePage> {
                   children: [
                     UpcomingPage(),
                    CompletedPage(),
-                    ChatScreen()
                   ],
                 ))),
       ),

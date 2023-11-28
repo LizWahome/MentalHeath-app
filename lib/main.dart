@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mental_health_app/firebase_options.dart';
+import 'package:mental_health_app/pages/bottom_nav_bar.dart';
 import 'package:mental_health_app/pages/splash.dart';
 import 'package:mental_health_app/pages/therapist/therapist_page.dart';
 import 'package:mental_health_app/theme/theme.dart';
@@ -31,7 +32,6 @@ class _MyAppState extends State<MyApp> {
         // theme: MyThemes().lightMode,
         // darkTheme: MyThemes().darkMode,
         home: SpashPage(),
-        //home: TherapistPage(),
       );
     } );
   }

@@ -21,6 +21,7 @@ class _ProfilePageState extends State<ProfilePage> {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
+        height: double.infinity,
         decoration: BoxDecoration(
             gradient: LinearGradient(colors: [
               Colors.blueGrey.withOpacity(0.5),

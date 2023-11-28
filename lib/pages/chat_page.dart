@@ -12,17 +12,17 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   TextEditingController chatController = TextEditingController();
   final List<ChatMessage> _messages = [];
-  static String apiKey = "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";
+  static String apiKey = "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";
+  //static String apiKey = "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";
 
   late OpenAI? openAI;
-
-  
 
   @override
   void initState() {
     openAI = OpenAI.instance.build(
         token: apiKey,
-        baseOption: HttpSetup(receiveTimeout: const Duration(milliseconds: 6000)));
+        baseOption:
+            HttpSetup(receiveTimeout: const Duration(milliseconds: 6000)));
     super.initState();
   }
 
@@ -36,7 +36,7 @@ class _ChatPageState extends State<ChatPage> {
 
   void _sendMessage() async {
     ChatMessage message =
-        ChatMessage(text: chatController.text, sender: "user");
+        ChatMessage(text: chatController.text, sender: "Me");
 
     setState(() {
       _messages.insert(0, message);
@@ -51,7 +51,7 @@ class _ChatPageState extends State<ChatPage> {
 
     void insertNewData(String response) {
       ChatMessage botMessage =
-          ChatMessage(text: response.toString(), sender: "bot");
+          ChatMessage(text: response.toString(), sender: "Bot");
 
       setState(() {
         _messages.insert(0, botMessage);
@@ -59,8 +59,6 @@ class _ChatPageState extends State<ChatPage> {
     }
 
     insertNewData(response!.choices[0].text);
-
-    
   }
 
   Widget _buildTextComposer() {
@@ -72,7 +70,8 @@ class _ChatPageState extends State<ChatPage> {
             child: TextField(
               controller: chatController,
               onSubmitted: (value) => _sendMessage(),
-              decoration: const InputDecoration.collapsed(hintText: "Send a message"),
+              decoration:
+                  const InputDecoration.collapsed(hintText: "Send a message", filled: true),
             ),
           ),
           IconButton(

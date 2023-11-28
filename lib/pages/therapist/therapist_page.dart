@@ -4,6 +4,7 @@ import 'package:mental_health_app/pages/bottom_nav_bar.dart';
 import 'package:mental_health_app/pages/chat_screen.dart';
 import 'package:mental_health_app/pages/profile_page.dart';
 import 'package:mental_health_app/pages/therapist/therapist_completed.dart';
+import 'package:mental_health_app/pages/therapist/therapist_home.dart';
 import 'package:mental_health_app/pages/therapist/therapist_profile.dart';
 import 'package:mental_health_app/pages/therapist/therapist_schedule.dart';
 
@@ -17,6 +18,7 @@ class TherapistPage extends StatefulWidget {
 class _TherapistPageState extends State<TherapistPage> {
   int currentIndex = 1;
   final screens = [
+    const TherapistHomePage(),
     const TherapistSchedulePage(),
     const TherapistCompletedPage(),
     const TherapistProfile()
@@ -24,17 +26,21 @@ class _TherapistPageState extends State<TherapistPage> {
   @override
   Widget build(BuildContext context) {
     final items = [
+       const Icon(
+        Icons.home_rounded,
+        size: 25,
+      ),
       const Icon(
         Icons.calendar_month_rounded,
-        size: 30,
+        size: 25,
       ),
       const Icon(
         Icons.pending_actions_rounded,
-        size: 30,
+        size: 25,
       ),
       const Icon(
         Icons.person,
-        size: 30,
+        size: 25,
       )
     ];
     return Scaffold(
@@ -55,7 +61,7 @@ class _TherapistPageState extends State<TherapistPage> {
         backgroundColor: Colors.white.withOpacity(0.1),
         items: items,
         index: currentIndex,
-        height: 60,
+        height: 50,
         onTap: (index) => setState(() {
           currentIndex = index;
         })

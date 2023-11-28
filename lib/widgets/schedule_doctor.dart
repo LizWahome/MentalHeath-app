@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class ScheduleDoctor extends StatelessWidget {
   final String image;
@@ -7,13 +8,14 @@ class ScheduleDoctor extends StatelessWidget {
   final String day;
   final String date;
   final Widget? row;
-   const ScheduleDoctor(
+  const ScheduleDoctor(
       {super.key,
       required this.image,
       required this.name,
       required this.title,
       required this.day,
-      required this.date, this.row});
+      required this.date,
+      this.row});
 
   @override
   Widget build(BuildContext context) {
@@ -86,17 +88,69 @@ class ScheduleDoctor extends StatelessWidget {
                   ),
                 ),
                 // SizedBox(height: 10,),
-                Row(
+                row ?? Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ElevatedButton(
-                  onPressed: (){}, child: Icon(Icons.close_rounded, color: Colors.red.shade700,)),
-                
-                SizedBox(width: 5,),
-                ElevatedButton(onPressed: (){}, child: Icon(Icons.check, color: Colors.greenAccent,))
-               
-              ],
-            ),
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                    title: const Text(
+                                        "Are you sure you want to cancel this appointment?"),
+                                    content: LottieBuilder.asset(
+                                      "assets/Animation - 1701158440431.json",
+                                      width: 100,
+                                      height: 100,
+                                    ),
+                                    actions: [
+                                      ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text("Yes")),
+                                      ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text("No"))
+                                    ],
+                                  ));
+                        },
+                        child: Icon(
+                          Icons.close_rounded,
+                          color: Colors.red.shade700,
+                        )),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    ElevatedButton(
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                    title: const Text(
+                                        "Your appointment has successfully been added."),
+                                    content: LottieBuilder.asset(
+                                      "assets/Animation - 1701159535048.json",
+                                      width: 100,
+                                      height: 100,
+                                    ),
+                                    actions: [
+                                      ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text("OK")),
+                                    ],
+                                  ));
+                        },
+                        child: Icon(
+                          Icons.check,
+                          color: Colors.greenAccent,
+                        ))
+                  ],
+                ),
               ],
             )
           ],

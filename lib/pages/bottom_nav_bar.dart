@@ -1,5 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:mental_health_app/pages/chat_page.dart';
 import 'package:mental_health_app/pages/chat_screen.dart';
 import 'package:mental_health_app/pages/home_page.dart';
 import 'package:mental_health_app/pages/profile_page.dart';
@@ -17,7 +18,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   final screens = const [
     HomePage(),
     SchedulePage(),
-    ChatScreen(),
+    ChatPage(),
     ProfilePage(),
   ];
 
@@ -26,23 +27,23 @@ class _BottomNavBarState extends State<BottomNavBar> {
     final items = [
       const Icon(
         Icons.home,
-        size: 30,
+        size: 25,
       ),
       const Icon(
         Icons.calendar_month_rounded,
-        size: 30,
+        size: 25,
       ),
       const Icon(
         Icons.message_rounded,
-        size: 30,
+        size: 25,
       ),
       const Icon(
         Icons.person_2_rounded,
-        size: 30,
+        size: 25,
       ),
     ];
     return Scaffold(
-      extendBody: true,
+      extendBody: false,
       body: IndexedStack(
         index: currentIndex,
         children: screens,
@@ -52,7 +53,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         backgroundColor: Colors.transparent,
         items: items,
         index: currentIndex,
-        height: 60,
+        height: 50,
         onTap: (index) => setState(() {
           currentIndex = index;
         })),

@@ -22,6 +22,7 @@ class _TherapistCompletedPageState extends State<TherapistCompletedPage> {
               title: "Student", 
               day: "Today", 
               date: "09:00 - 11:00",
+              row: Row(),
               ),
               SizedBox(
                 height: 10,
@@ -32,6 +33,7 @@ class _TherapistCompletedPageState extends State<TherapistCompletedPage> {
               title: "Student", 
               day: "Monday", 
               date: "09:00 - 11:00",
+              row: Row(),
               ),
               SizedBox(
                 height: 10,
@@ -42,6 +44,7 @@ class _TherapistCompletedPageState extends State<TherapistCompletedPage> {
               title: "Student", 
               day: "Saturday", 
               date: "2:00 - 3:00",
+              row: Row(),
               ),
               SizedBox(
                 height: 10,

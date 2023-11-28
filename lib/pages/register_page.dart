@@ -2,9 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mental_health_app/main.dart';
 import 'package:mental_health_app/models/user_model.dart';
-import 'package:mental_health_app/pages/chat_screen.dart';
 import 'package:mental_health_app/pages/login_page.dart';
 import 'package:mental_health_app/pages/welcome_page.dart';
 
