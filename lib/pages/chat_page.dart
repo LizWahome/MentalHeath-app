@@ -12,8 +12,7 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   TextEditingController chatController = TextEditingController();
   final List<ChatMessage> _messages = [];
-  static String apiKey = "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";
-  //static String apiKey = "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";
+  static String apiKey = "MY-API-KEY";
 
   late OpenAI? openAI;
 

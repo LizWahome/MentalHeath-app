@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mental_health_app/pages/bottom_nav_bar.dart';
+import 'package:mental_health_app/pages/student/bottom_nav_bar.dart';
 import 'package:mental_health_app/pages/register_page.dart';
 import 'package:mental_health_app/pages/therapist/therapist_page.dart';
 import 'package:mental_health_app/pages/welcome_page.dart';

@@ -57,30 +57,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
         onTap: (index) => setState(() {
           currentIndex = index;
         })),
-      // bottomNavigationBar: BottomNavigationBar(
-      //     type: BottomNavigationBarType.fixed,
-      //     currentIndex: currentIndex,
-      //     onTap: (index) => setState(() {
-      //           currentIndex = index;
-      //         }),
-      //     items: const [
-      //       BottomNavigationBarItem(
-      //         icon: Icon(Icons.home),
-      //         label: "Home",
-      //       ),
-      //       BottomNavigationBarItem(
-      //         icon: Icon(Icons.calendar_month),
-      //         label: "Calender",
-      //       ),
-      //       BottomNavigationBarItem(
-      //         icon: Icon(Icons.message_rounded),
-      //         label: "Chat",
-      //       ),
-      //       BottomNavigationBarItem(
-      //         icon: Icon(Icons.person_outline_rounded),
-      //         label: "Profile",
-      //       )
-      //     ]),
     );
   }
 }

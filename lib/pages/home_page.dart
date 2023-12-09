@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mental_health_app/models/user_model.dart';
+import 'package:mental_health_app/pages/student/student_booking.dart';
 import 'package:mental_health_app/pages/therapist/therapist_page.dart';
 import 'package:mental_health_app/widgets/health_needs.dart';
 import 'package:mental_health_app/widgets/nearby_doctor.dart';
@@ -21,94 +22,104 @@ class _HomePageState extends State<HomePage> {
   //User? user;
   @override
   Widget build(BuildContext context) {
-    
-    return Container(
-      decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-              Colors.blueGrey.withOpacity(0.5),
-              Colors.white.withOpacity(0.1),
-              Colors.blue
-            ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
-          ),
-      child: const SafeArea(
-        minimum: EdgeInsets.only(top: 50, left: 20, right: 20),
-        child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(colors: [
+            Colors.blueGrey.withOpacity(0.5),
+            Colors.white.withOpacity(0.1),
+            Colors.blue
+          ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
+        ),
+        child: const SafeArea(
+          minimum: EdgeInsets.only(top: 50, left: 20, right: 20),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Hello",
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: 'LilitaOne')),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text("How are you doing today?",
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: 'Shirkhand'))
-                          ],
+                        Text("Hello",
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w400,
+                                fontFamily: 'LilitaOne')),
+                        SizedBox(
+                          height: 5,
                         ),
-                        CircleAvatar(
-                          radius: 30,
-                          backgroundImage: AssetImage("assets/sad-2042536_1280.jpg"),
-                        )
+                        Text("How are you doing today?",
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: 'Shirkhand'))
                       ],
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    ScheduleDoctor(
-                        image: "assets/doctor-2337835_1280.jpg",
-                        name: "Dr. Salim Faraj",
-                        title: "Therapist",
-                        day: "Today",
-                        date: "14:30 - 16:00"),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Text(
-                      "Health Needs",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          fontFamily: 'LilitaOne',
-                          letterSpacing: 1.2),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    HealthNeeds(),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Text("Nearby Doctor",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            fontFamily: 'LilitaOne',
-                            letterSpacing: 1.2)),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    NearbyDoctors(),
-                    // TextButton(
-                    //     onPressed: () {
-                    //       checkRole(snapshot);
-                    //     },
-                    //     child: const Text("Check role"))
+                    CircleAvatar(
+                      radius: 30,
+                      backgroundImage:
+                          AssetImage("assets/sad-2042536_1280.jpg"),
+                    )
                   ],
                 ),
-              ),
+                SizedBox(
+                  height: 20,
+                ),
+                ScheduleDoctor(
+                    image: "assets/doctor-2337835_1280.jpg",
+                    name: "Dr. Salim Faraj",
+                    title: "Therapist",
+                    day: "Today",
+                    date: "14:30 - 16:00"),
+                SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  "Health Needs",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      fontFamily: 'LilitaOne',
+                      letterSpacing: 1.2),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                HealthNeeds(),
+                SizedBox(
+                  height: 30,
+                ),
+                Text("Nearby Doctor",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        fontFamily: 'LilitaOne',
+                        letterSpacing: 1.2)),
+                SizedBox(
+                  height: 30,
+                ),
+                NearbyDoctors(),
+                // TextButton(
+                //     onPressed: () {
+                //       checkRole(snapshot);
+                //     },
+                //     child: const Text("Check role"))
+              ],
+            ),
+          ),
+        ),
       ),
+      floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => StudentBookingPage()),
+                (route) => false);
+          },
+          label: Text("Book Appointment")),
     );
   }
 

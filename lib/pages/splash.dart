@@ -26,8 +26,9 @@ class _SpashPageState extends State<SpashPage> with TickerProviderStateMixin {
 
   @override
   void dispose() {
+     controller.dispose();
     super.dispose();
-    controller.dispose();
+   
   }
 
   @override

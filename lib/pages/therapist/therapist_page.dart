@@ -1,6 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:mental_health_app/pages/bottom_nav_bar.dart';
+import 'package:mental_health_app/pages/student/bottom_nav_bar.dart';
 import 'package:mental_health_app/pages/chat_screen.dart';
 import 'package:mental_health_app/pages/profile_page.dart';
 import 'package:mental_health_app/pages/therapist/therapist_completed.dart';
@@ -16,7 +16,7 @@ class TherapistPage extends StatefulWidget {
 }
 
 class _TherapistPageState extends State<TherapistPage> {
-  int currentIndex = 1;
+  int currentIndex = 0;
   final screens = [
     const TherapistHomePage(),
     const TherapistSchedulePage(),
